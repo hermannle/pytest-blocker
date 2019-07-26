@@ -18,7 +18,7 @@ def pytest_runtest_makereport(item, call):
     # get current report status from _pytest.runner.pytest_runtest_makereport
     outcome = yield
     report = outcome.get_result()
-    if report.failed and item.get_marker('blocker'):
+    if report.failed and item.get_closest_marker('blocker'):
         skip_reason = "Blocker test {0} failed, skipping remaining tests.".format(item.name)
         for test in item.session.items:
             if test.name != item.name:
